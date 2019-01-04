@@ -1,0 +1,17 @@
+
+根据训练集聚类anchors:
+    ./darknet detector calc_anchors ./cfg/voc_infrared1.data -width 704 -heigh 576 -num_of_clusters 12 -show
+    
+训练：
+    ./darknet detector train ./cfg/voc_infrared.data ./cfg/yolov3-voc_infrared.cfg  darknet53.conv.74 | tee train_9anchor.log 
+
+单张图片测试：
+    ./darknet detector test /opt/zhangjing/darknet/darknet-master/cfg/voc_infrared1.data /opt/zhangjing/darknet/darknet-master/cfg/yolov3-voc_infrared1.cfg  /opt/zhangjing/darknet/darknet-master/backup/infrared_704_12anchors/yolov3-voc_infrared1_10000.weights  /opt/zhangjing/darknet-master/test/img/1.jpg
+    如果有opencv，测试结果会保存在./predictions.png
+
+文件夹测试：
+    ./darknet detector test1 /opt/zhangjing/darknet/darknet-master/cfg/voc_infrared1.data /opt/zhangjing/darknet/darknet-master/cfg/yolov3-voc_infrared1.cfg  /opt/zhangjing/darknet/darknet-master/backup/infrared_704_12anchors/yolov3-voc_infrared1_10000.weights  /opt/zhangjing/darknet-master/test/img/ 
+    输出：./test/out out文件夹需要自己创建
+    
+mAP测试：
+    ./darknet detector map /opt/zhangjing/darknet/darknet-master/cfg/voc_infrared.data /opt/zhangjing/darknet/darknet-master/cfg/yolov3-voc_infrared.cfg /opt/zhangjing/darknet/darknet-master/backup/infrared_704_9anchors/yolov3-voc_infrared_1000.weights
